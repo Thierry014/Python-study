@@ -20,3 +20,11 @@ bool()
 
 #查看数据类型
 type()
+
+
+# 区别 function, method, magic-method
+x = 'banana'
+len(x) => function => 通用方法适合一切变量
+
+x.lower() => method => 特定方法, 适用于本身(这里是字符串)
+
