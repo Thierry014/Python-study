@@ -25,6 +25,7 @@ print(pt2.x)
 
 
 class Person:
+    # constructor构造函数
     def __init__(self,name):
         self.name = name
     
