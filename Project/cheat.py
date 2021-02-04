@@ -79,3 +79,10 @@ for k,v in numbers => k = key name / v = 对应value
 for planet in planets:
     print(planet, end=' ') #print all on same line 用空格隔开每一个
 
+
+
+
+funtion<module<package
+
+方法(code), 方法集(file), 包(directory)
+方法写在方法集中储存在包里
