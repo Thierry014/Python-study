@@ -1,7 +1,7 @@
 # Number
 from os import O_NDELAY, strerror
 
-
+# 取小数点
 round(number, digits)
 
 
@@ -64,6 +64,11 @@ str.rstrip('arg')
 str.isnumeric() => True/False
 str.isdigit() => True/False
 
+# 切割单词
+https://forum.freecodecamp.org/t/how-to-use-python-slice-with-the-start-stop-and-step-arguments-explained-with-examples/19202
+# 切割字符串
+str = 'jason'
+list(str) => ['j','a','s','o','n']
 
 #Dict
 numbers = {'one':1, 'two':2, 'three':3}

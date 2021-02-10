@@ -1,0 +1,122 @@
+数据结构
+
+Client > Project >Dataset > Tables > Tables
+
+获取数据步骤
+client = bigquery.Client()
+
+设置dataset reference
+dataset_ref = client.dataset("dataset name", project = "project name")
+
+获取数据集(多个表的集合)
+dataset = client.get_dataset(dataset_ref)
+
+所有表
+tables = list(client.list_tables(dataset))
+
+选取表 先更具表名设置ref 再通过ref进表
+
+table_ref = dataset_ref.table("table name")
+
+table = client.get_table(table_ref)
+
+
+
+
+其他指令
+table.schema 查看表的结构
+
+client.list_rows(table, max_results=5).to_dataframe() 查看表的前五行
+client.list_rows(table, selected_fields=table.schema[:1], max_results=5).to_dataframe() 加条件
+
+
+写query SQL
+
+query = """ 
+        SELECT score, title
+        FROM `bigquery-public-data.hacker_news.full` //project.dataset.table
+        WHERE type = "job"  
+        """
+
+运行query
+query_job = client.query(query)
+
+safe_config = bigquery.QueryJobConfig(maximum_bytes_billed=10**10)
+rides_per_year_query_job = client.query(rides_per_year_query, job_config=safe_config) 
+
+
+存数据
+us_cities = query_job.to_dataframe()
+rides_per_year_result = rides_per_year_query_job.to_dataframe() 
+
+看数据
+print(rides_per_year_result)
+
+
+操作数据
+us_cities.city.value_counts().head()  //变量.col_name.方法.方法
+
+query
+# count() 配合 group by 使用
+
+'''
+                SELECT parent, COUNT(id) AS NumPosts
+                FROM `bigquery-public-data.hacker_news.comments`
+                GROUP BY parent
+                HAVING COUNT(id) > 10
+'''
+
+COUNT(1) CAN count the rows in each group
+
+orderby 排序(字母数字) DESC 反向
+EXTRACT(日期数据) as Day/Week
+
+
+'''
+     SELECT indicator_code, indicator_name, count(1) as num_rows 
+     FROM `bigquery-public-data.world_bank_intl_education.international_education`
+     WHERE year = 2016
+     GROUP BY indicator_code,indicator_name
+     HAVING num_rows >= 175
+     ORDER BY num_rows DESC
+''''
+
+WITH t1 AS(
+        选一张表存到 t1
+)
+select col_name from t1
+
+WITH time AS 
+(
+SELECT DATE(block_timestamp) AS trans_date
+FROM `bigquery-public-data.crypto_bitcoin.transactions`
+)
+
+ SELECT COUNT(1) AS transactions, trans_date
+ FROM time
+ GROUP BY trans_date
+ ORDER BY trans_date
+
+
+实例
+"""
+WITH RelevantRides AS
+(
+    SELECT EXTRACT (HOUR FROM trip_start_timestamp) AS hour_of_day, trip_miles,trip_seconds
+    FROM `bigquery-public-data.chicago_taxi_trips.taxi_trips`
+    WHERE trip_start_timestamp > '2017-01-01' and trip_start_timestamp < '2017-07-01' and trip_seconds > 0 and trip_miles > 0
+)
+SELECT hour_of_day, count(1) as num_trips, 3600 * SUM(trip_miles) / SUM(trip_seconds) as avg_mph
+FROM RelevantRides
+GROUP BY hour_of_day
+ORDER BY hour_of_day
+"""
+
+
+
+
+
+通过表来做线图
+transactions_by_date.set_index('trans_date').plot()
+
+

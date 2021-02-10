@@ -44,4 +44,7 @@ def calc_hand(hands):
             
     return total
 
-print(calc_hand(['6','K',7]))
+# print(calc_hand(['6','K',7]))
+
+word = 'jason'
+print(word.split(' '))

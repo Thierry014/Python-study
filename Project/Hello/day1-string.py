@@ -38,3 +38,7 @@ print('course' in course)
 
 course.title()
 print(course)
+
+
+# 切割字符串
+spilt()
