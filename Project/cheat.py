@@ -19,6 +19,10 @@ return not (A or B or C)
 
 三选要A不要B,要B不要A
 return (A or B) and not (A and B)
+常见错误
+synatax error => 是不是缺少冒号
+
+
 
 三选一
 return(A+B+C == 1)

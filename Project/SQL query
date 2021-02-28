@@ -1,6 +1,6 @@
 数据结构
 
-Client > Project >Dataset > Tables > Tables
+Client > Project >Dataset > Tables > Table
 
 获取数据步骤
 client = bigquery.Client()
@@ -120,3 +120,9 @@ ORDER BY hour_of_day
 transactions_by_date.set_index('trans_date').plot()
 
 
+Join query
+
+select a.name as pet b.name as owner 
+from pet as a
+inner join owner as b 
+on a.id = b.p_id

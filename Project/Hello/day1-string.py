@@ -41,4 +41,31 @@ print(course)
 
 
 # 切割字符串
-spilt()
+# str = 'jason'
+# list(str) => ['j','a','s','o','n']
+# list1 = list(str)
+# list1.pop(0)
+# print(''.join(list1))
+
+
+def reverse(x):
+        
+        is_neg = False
+        str_num = list(str(x))
+        
+        if str_num[0] == '-':
+            print(str_num)
+            is_neg = True
+            str_num.pop(0)
+
+        
+        flip_str = str_num[::-1]
+        result = int(float(''.join(flip_str)))
+        
+        if is_neg:
+            result *= -1
+        
+        return result
+
+
+print(reverse(-321))
