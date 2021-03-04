@@ -67,6 +67,7 @@ list1 = [1,4,5,2,1,7]
 
 start = 1
 gap = 2
+k = 1
 list1 = []
 while len(list1) < 11:
     list1.append(start)
