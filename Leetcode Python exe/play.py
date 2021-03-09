@@ -1,13 +1,13 @@
+def strToNum(s):
+    dic = {}
+    res = ''
+    for i in range(1,len(s)+1):
+        dic[s[i-1]] = i 
+    
+    print(dic)
+    for i in s:
+        res += str(dic[i])
+            
+    return res
 
-
-lst = [1,3,1,4,9,2,11,2,5,67,0,1]
-
-set(lst)
-lst.sort()
-print(lst[::-1])
-
-print(lst.count(1))
-
-
-list1 = [['1','2'],['3','4','6']]
-print(','.join(list1))
+print(strToNum('add'))
